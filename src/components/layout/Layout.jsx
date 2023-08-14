@@ -1,6 +1,6 @@
 import Navbar from "../container/Navbar";
 
-const Layout = (children) => {
+const Layout = ({ children }) => {
 	return (
 		<>
 			<header>
