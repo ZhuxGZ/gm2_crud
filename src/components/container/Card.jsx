@@ -16,12 +16,18 @@ import {
 	Divider,
 	Box,
 	Button,
+	FormControl,
+	FormLabel,
+	Stack,
+	Input,
+	Textarea,
 } from "@mui/joy";
 
 import { Delete, Edit, MoreVert, WarningRounded } from "@mui/icons-material";
 
-const ProductCard = ({ name, price, img }) => {
+const ProductCard = ({ name, price, description, img }) => {
 	const [removeWarning, setRemoveWarning] = useState(false);
+	const [editForm, setEditForm] = useState(false);
 	return (
 		<div className="card max-w-xs">
 			<Card variant="outlined" color="neutral" size="md">
@@ -42,7 +48,7 @@ const ProductCard = ({ name, price, img }) => {
 								<MoreVert />
 							</MenuButton>
 							<Menu sx={{ translate: "-2em" }}>
-								<MenuItem color="warning">
+								<MenuItem color="warning" onClick={() => setEditForm(true)}>
 									<Edit />
 									Edit
 								</MenuItem>
@@ -95,6 +101,47 @@ const ProductCard = ({ name, price, img }) => {
 										Delete
 									</Button>
 								</Box>
+							</ModalDialog>
+						</Modal>
+						<Modal open={editForm} onClose={() => setEditForm(false)}>
+							<ModalDialog
+								aria-labelledby="basic-modal-dialog-title"
+								aria-describedby="basic-modal-dialog-description"
+								sx={{ minWidth: 400 }}
+							>
+								<Typography id="basic-modal-dialog-title" level="h2">
+									Edit your product
+								</Typography>
+								<form
+									onSubmit={(event) => {
+										event.preventDefault();
+										setEditForm(false);
+									}}
+								>
+									<Stack spacing={2}>
+										<FormControl>
+											<FormLabel>Name</FormLabel>
+											<Input autoFocus placeholder={name} />
+										</FormControl>
+										<FormControl>
+											<FormLabel>Price</FormLabel>
+											<Input
+												autoFocus
+												startDecorator={"$"}
+												type="number"
+												placeholder={price}
+											/>
+										</FormControl>
+										<FormControl>
+											<FormLabel>Description</FormLabel>
+											<Textarea
+												placeholder={description}
+												sx={{ mb: 1, height: 100 }}
+											/>
+										</FormControl>
+										<Button type="submit">Submit</Button>
+									</Stack>
+								</form>
 							</ModalDialog>
 						</Modal>
 					</CardActions>
