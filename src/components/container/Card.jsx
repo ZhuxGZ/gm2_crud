@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import {
 	Card,
 	CardContent,
@@ -9,15 +11,21 @@ import {
 	MenuButton,
 	MenuItem,
 	IconButton,
+	Modal,
+	ModalDialog,
+	Divider,
+	Box,
+	Button,
 } from "@mui/joy";
 
-import { Delete, Edit, MoreVert } from "@mui/icons-material";
+import { Delete, Edit, MoreVert, WarningRounded } from "@mui/icons-material";
 
 const ProductCard = ({ name, price, img }) => {
+	const [removeWarning, setRemoveWarning] = useState(false);
 	return (
 		<div className="card max-w-xs">
 			<Card variant="outlined" color="neutral" size="md">
-				<AspectRatio minHeight="140px" maxHeight="200px">
+				<AspectRatio minHeight="140px" maxHeight="240px">
 					<img src={img} loading="lazy" alt="" />
 				</AspectRatio>
 				<CardContent orientation="horizontal" sx={{ pt: "0.5em" }}>
@@ -38,12 +46,57 @@ const ProductCard = ({ name, price, img }) => {
 									<Edit />
 									Edit
 								</MenuItem>
-								<MenuItem color="danger">
+								<MenuItem color="danger" onClick={() => setRemoveWarning(true)}>
 									<Delete />
 									Remove
 								</MenuItem>
 							</Menu>
 						</Dropdown>
+						<Modal open={removeWarning} onClose={() => setRemoveWarning(false)}>
+							<ModalDialog
+								variant="outlined"
+								role="alertdialog"
+								aria-aria-labelledby="alert-title"
+								aria-aria-describedby="alert-desc"
+							>
+								<Typography
+									level="h2"
+									id="alert-title"
+									startDecorator={<WarningRounded />}
+								>
+									Are you sure?
+								</Typography>
+								<Divider sx={{ mt: "1em", mb: "1em" }} />
+								<Typography id="alert-desc" textColor="text.tertiary">
+									The product would be deleted permanently and it would be
+									irrecoverable.
+								</Typography>
+								<Box
+									sx={{
+										display: "flex",
+										gap: 1,
+										justifyContent: "flex-end",
+										pt: 2,
+										mt: "1em",
+									}}
+								>
+									<Button
+										varian="plain"
+										color="neutral"
+										onClick={() => setRemoveWarning(false)}
+									>
+										Cancel
+									</Button>
+									<Button
+										variant="solid"
+										color="danger"
+										onClick={() => setRemoveWarning(false)}
+									>
+										Delete
+									</Button>
+								</Box>
+							</ModalDialog>
+						</Modal>
 					</CardActions>
 				</CardContent>
 			</Card>
