@@ -15,7 +15,7 @@ const ProductCard = () => {
 			<div className="cardBottom flex items-center mr-2">
 				<p className="price text-lg">$2500</p>
 				<Button sx={{ marginLeft: 'auto' }} color="neutral">
-					<Settings />
+					<Settings sx={{ fill: '#FF8645' }} />
 				</Button>
 			</div>
 		</Card>
