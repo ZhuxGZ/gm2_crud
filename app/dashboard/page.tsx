@@ -1,5 +1,6 @@
 import { Add } from '@mui/icons-material';
 import { Button, Divider } from '@mui/joy';
+import ProductDisplay from '../components/containers/ProductDisplay';
 
 const Dashboard = () => {
 	return (
@@ -11,7 +12,7 @@ const Dashboard = () => {
 				</Button>
 			</section>
 			<Divider sx={{ marginLeft: '1.5rem', marginRight: '1.5rem' }} />
-			<section id="productsDisplay"></section>
+			<ProductDisplay />
 		</>
 	);
 };

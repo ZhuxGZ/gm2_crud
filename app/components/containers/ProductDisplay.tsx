@@ -1,10 +1,11 @@
 import { Grid } from '@mui/joy';
 import { ReactNode } from 'react';
+import ProductCard from './productCard';
 
-const ProductDisplay = ({ children }: { children: ReactNode }) => {
+const ProductDisplay = () => {
 	return (
-		<Grid container spacing={2}>
-			{children}
+		<Grid container spacing={2} sx={{ margin: '2rem' }}>
+			<ProductCard />
 		</Grid>
 	);
 };
