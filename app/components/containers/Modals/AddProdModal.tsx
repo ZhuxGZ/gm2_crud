@@ -16,7 +16,7 @@ import { Add } from '@mui/icons-material';
 const AddProdModal = () => {
 	const [open, setOpen] = useState<boolean>(false);
 	return (
-		<Fragment>
+		<>
 			<Button
 				variant="plain"
 				color="success"
@@ -76,7 +76,7 @@ const AddProdModal = () => {
 					</form>
 				</ModalDialog>
 			</Modal>
-		</Fragment>
+		</>
 	);
 };
 

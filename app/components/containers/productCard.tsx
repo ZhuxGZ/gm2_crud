@@ -4,7 +4,7 @@ import Image from 'next/image';
 import DeleteProdModal from './Modals/DeleteProdModal';
 import EditProdModal from './Modals/EditProdModal';
 
-const ProductCard = () => {
+const ProductCard = ({ name, price, id }: { name: string; price: string; id: string }) => {
 	return (
 		<Card variant="solid">
 			<div className="prodImg">
@@ -15,10 +15,10 @@ const ProductCard = () => {
 					alt="Mackbook photo"
 				/>
 			</div>
-			<div className="cardBottom flex mr-2 mt-4 mb-2 justify-center items-center">
+			<div className="cardBottom flex mr-2 mt-4 mb-2 items-center justify-between">
 				<div className="prodInfo">
-					<h3 className="title font-bold text-xl ">Mackbook</h3>
-					<p className="price text-lg">$2500</p>
+					<h3 className="mr-0 title font-bold text-lg w-60">{`${name}`}</h3>
+					<p className="price text-lg">{`$${price}`}</p>
 				</div>
 				<Dropdown>
 					<MenuButton
@@ -30,10 +30,10 @@ const ProductCard = () => {
 					</MenuButton>
 					<Menu keepMounted sx={{ padding: 0 }}>
 						<MenuItem sx={{ padding: '1px 1px' }}>
-							<DeleteProdModal />
+							<DeleteProdModal id={id} />
 						</MenuItem>
 						<MenuItem sx={{ padding: '1px 1px' }}>
-							<EditProdModal />
+							<EditProdModal id={id} />
 						</MenuItem>
 					</Menu>
 				</Dropdown>

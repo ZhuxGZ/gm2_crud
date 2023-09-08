@@ -4,10 +4,17 @@ import { Box, Button, Divider, Modal, ModalDialog, Typography } from '@mui/joy';
 import DeleteForever from '@mui/icons-material/DeleteForever';
 import WarningRoundedIcon from '@mui/icons-material/WarningRounded';
 
-const DeleteProdModal = () => {
+const DeleteProdModal = ({ id }: { id: string }) => {
 	const [open, setOpen] = useState<boolean>(false);
+	const API_URL = `https://64fb193acb9c00518f7aa434.mockapi.io/api/v1/id/${id}`;
+	const deleteProduct = async () => {
+		await fetch(API_URL, { method: 'DELETE' });
+		setOpen(false);
+		window.location.reload();
+	};
+
 	return (
-		<Fragment>
+		<>
 			<Button
 				variant="plain"
 				color="danger"
@@ -38,13 +45,13 @@ const DeleteProdModal = () => {
 						<Button variant="plain" color="neutral" onClick={() => setOpen(false)}>
 							Cancel
 						</Button>
-						<Button variant="solid" color="danger" onClick={() => setOpen(false)}>
+						<Button variant="solid" color="danger" onClick={deleteProduct}>
 							Discard
 						</Button>
 					</Box>
 				</ModalDialog>
 			</Modal>
-		</Fragment>
+		</>
 	);
 };
 
