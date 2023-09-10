@@ -13,7 +13,6 @@ const ProductDisplay = () => {
 			const response = await fetch(API_URL);
 			const data = (await response.json()) as APIResponse;
 			setProducts(data);
-			console.log('hola');
 		};
 		getData();
 	}, []);

@@ -16,11 +16,12 @@ import {
 const EditProdModal = ({ id }: { id: string }) => {
 	const [open, setOpen] = useState<boolean>(false);
 	const API_URL = `https://64fb193acb9c00518f7aa434.mockapi.io/api/v1/id/${id}`;
-	let formValues = [];
-	const EditProduct = async (event: any) => {
+
+	const editProduct = async (event: any) => {
 		const formValues = {
 			name: event.target[0].value,
 			price: event.target[1].value,
+			image: event.target[2].value,
 		};
 
 		let bodyValues = {};
@@ -35,15 +36,15 @@ const EditProdModal = ({ id }: { id: string }) => {
 
 		const options = {
 			method: 'PUT',
+			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify(bodyValues),
-			headers: {
-				'Content-type': 'application/json; charset=UTF-8',
-			},
 		};
 
-		await fetch(API_URL, options);
-
+		const response = await fetch(API_URL, options);
+		const data = await response.json();
+		console.log(data);
 		setOpen(false);
+		await window.location.reload();
 	};
 
 	return (
@@ -59,7 +60,8 @@ const EditProdModal = ({ id }: { id: string }) => {
 					<Divider sx={{ margin: '10px 1px' }} />
 					<form
 						onSubmit={(event) => {
-							EditProduct(event);
+							editProduct(event);
+							event.preventDefault();
 						}}
 					>
 						<Stack spacing={2}>
@@ -69,14 +71,10 @@ const EditProdModal = ({ id }: { id: string }) => {
 							</FormControl>
 							<FormControl>
 								<FormLabel>Price</FormLabel>
-								<Input />
+								<Input type="number" />
 							</FormControl>
 							<FormControl>
-								<FormLabel>Discount</FormLabel>
-								<Input />
-							</FormControl>
-							<FormControl>
-								<FormLabel>Description</FormLabel>
+								<FormLabel>Image</FormLabel>
 								<Input />
 							</FormControl>
 

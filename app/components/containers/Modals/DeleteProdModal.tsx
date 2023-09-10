@@ -10,7 +10,7 @@ const DeleteProdModal = ({ id }: { id: string }) => {
 	const deleteProduct = async () => {
 		await fetch(API_URL, { method: 'DELETE' });
 		setOpen(false);
-		window.location.reload();
+		await window.location.reload();
 	};
 
 	return (

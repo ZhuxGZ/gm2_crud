@@ -1,6 +1,5 @@
 import { Settings } from '@mui/icons-material';
-import { Button, Card, Dropdown, Menu, MenuButton, MenuItem } from '@mui/joy';
-import Image from 'next/image';
+import { Card, Dropdown, Menu, MenuButton, MenuItem } from '@mui/joy';
 import DeleteProdModal from './Modals/DeleteProdModal';
 import EditProdModal from './Modals/EditProdModal';
 
@@ -8,12 +7,12 @@ const ProductCard = ({ name, price, id }: { name: string; price: string; id: str
 	return (
 		<Card variant="solid">
 			<div className="prodImg">
-				<Image
+				<img
 					src="https://http2.mlstatic.com/D_NQ_NP_2X_648428-MLA46516517286_062021-F.webp"
 					width={300}
 					height={250}
-					alt="Mackbook photo"
-				/>
+					alt="Product Photo"
+				></img>
 			</div>
 			<div className="cardBottom flex mr-2 mt-4 mb-2 items-center justify-between">
 				<div className="prodInfo">

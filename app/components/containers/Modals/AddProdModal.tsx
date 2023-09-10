@@ -1,5 +1,5 @@
 'use client';
-import { Fragment, useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
 	Button,
 	Divider,
@@ -15,6 +15,24 @@ import { Add } from '@mui/icons-material';
 
 const AddProdModal = () => {
 	const [open, setOpen] = useState<boolean>(false);
+	const API_URL = 'https://64fb193acb9c00518f7aa434.mockapi.io/api/v1/id';
+	const postProduct = async (event: any) => {
+		const options = {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({
+				name: event.target[0].value,
+				price: event.target[1].value,
+				image: event.target[2].value,
+			}),
+		};
+		const response = await fetch(API_URL, options);
+		const data = await response.json();
+		console.log(data);
+		setOpen(false);
+		window.location.reload();
+	};
+
 	return (
 		<>
 			<Button
@@ -32,8 +50,8 @@ const AddProdModal = () => {
 					<Divider sx={{ margin: '10px 1px' }} />
 					<form
 						onSubmit={(event) => {
+							postProduct(event);
 							event.preventDefault();
-							setOpen(false);
 						}}
 					>
 						<Stack spacing={2}>
@@ -43,14 +61,10 @@ const AddProdModal = () => {
 							</FormControl>
 							<FormControl>
 								<FormLabel>Price</FormLabel>
-								<Input required />
+								<Input type="number" required />
 							</FormControl>
 							<FormControl>
-								<FormLabel>Discount</FormLabel>
-								<Input />
-							</FormControl>
-							<FormControl>
-								<FormLabel>Description</FormLabel>
+								<FormLabel>Image</FormLabel>
 								<Input required />
 							</FormControl>
 
@@ -63,12 +77,7 @@ const AddProdModal = () => {
 								>
 									Cancel
 								</Button>
-								<Button
-									color="success"
-									type="submit"
-									sx={{ width: '60%' }}
-									onClick={() => setOpen(false)}
-								>
+								<Button color="success" type="submit" sx={{ width: '60%' }}>
 									Create
 								</Button>
 							</div>
